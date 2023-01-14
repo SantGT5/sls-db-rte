@@ -1,0 +1,13 @@
+{
+  "name": "sls-db-rte",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "sls:deploy": "serverless deploy --verbose",
+    "sls:info": "serverless info"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "serverless-http": "^2.7.0"
+  }
+}
