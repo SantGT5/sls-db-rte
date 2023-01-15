@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-require-imports": "error",
+    "@typescript-eslint/array-type": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/ban-types": "error",
+    "prettier/prettier": "error",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-var": "error",
+    "@typescript-eslint/consistent-type-exports": "warn",
+    "@typescript-eslint/prefer-as-const": "warn"
+  },
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "project": "tsconfig.json"
+  }
+}

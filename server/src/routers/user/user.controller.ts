@@ -23,7 +23,7 @@ async function HttpGetUserById(req: Request, res: Response): Promise<void> {
         .json({ error: 'Could not find user with provided "userId"' })
     }
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ error: "Could not retreive user" })
   }
 }
@@ -48,7 +48,7 @@ async function HttpEditUser(req: Request, res: Response): Promise<void> {
     await dynamoDbClient.put(params).promise()
     res.json({ userId, name })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ error: "Could not create user" })
   }
 }
