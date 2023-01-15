@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { Request, Response } from "express"
 import AWS from "aws-sdk"
 
-const USERS_TABLE: string | undefined = process.env.USERS_TABLE;
-const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
+const USERS_TABLE: string | undefined = process.env.USERS_TABLE
+const dynamoDbClient = new AWS.DynamoDB.DocumentClient()
 
 async function HttpGetUserById(req: Request, res: Response): Promise<void> {
   const params = {
@@ -10,30 +10,30 @@ async function HttpGetUserById(req: Request, res: Response): Promise<void> {
     Key: {
       userId: req.params.userId,
     },
-  };
+  }
 
   try {
-    const { Item } = await dynamoDbClient.get(params).promise();
+    const { Item } = await dynamoDbClient.get(params).promise()
     if (Item) {
-      const { userId, name } = Item;
-      res.json({ userId, name });
+      const { userId, name } = Item
+      res.json({ userId, name })
     } else {
       res
         .status(404)
-        .json({ error: 'Could not find user with provided "userId"' });
+        .json({ error: 'Could not find user with provided "userId"' })
     }
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Could not retreive user" });
+    console.log(error)
+    res.status(500).json({ error: "Could not retreive user" })
   }
 }
 
 async function HttpEditUser(req: Request, res: Response): Promise<void> {
-  const { userId, name } = req.body;
+  const { userId, name } = req.body
   if (typeof userId !== "string") {
-    res.status(400).json({ error: '"userId" must be a string' });
+    res.status(400).json({ error: '"userId" must be a string' })
   } else if (typeof name !== "string") {
-    res.status(400).json({ error: '"name" must be a string' });
+    res.status(400).json({ error: '"name" must be a string' })
   }
 
   const params = {
@@ -42,18 +42,15 @@ async function HttpEditUser(req: Request, res: Response): Promise<void> {
       userId: userId,
       name: name,
     },
-  };
+  }
 
   try {
-    await dynamoDbClient.put(params).promise();
-    res.json({ userId, name });
+    await dynamoDbClient.put(params).promise()
+    res.json({ userId, name })
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Could not create user" });
+    console.log(error)
+    res.status(500).json({ error: "Could not create user" })
   }
 }
 
-export {
-  HttpGetUserById,
-  HttpEditUser,
-};
+export { HttpGetUserById, HttpEditUser }

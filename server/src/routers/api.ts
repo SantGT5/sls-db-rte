@@ -1,11 +1,11 @@
-import express, { Router } from "express";
+import express, { Router } from "express"
 
-import { userRouter } from "./user/user.router";
-import { invalidRouter } from "./invalidRouter/invalidRouter.router";
+import { userRouter } from "./user/user.router"
+import { invalidRouter } from "./invalidRouter/invalidRouter.router"
 
-const api: Router = express.Router();
+const api: Router = express.Router()
 
-api.use("/users", userRouter);
-api.use(invalidRouter);
+api.use("/users", userRouter)
+api.use(invalidRouter)
 
-export { api };
+export { api }
