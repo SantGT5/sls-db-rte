@@ -32,11 +32,6 @@ async function HttpGetUserById(req: Request, res: Response): Promise<void> {
 
 async function HttpEditUser(req: Request, res: Response): Promise<void> {
   const { userId, name } = req.body
-  if (typeof userId !== "string") {
-    res.status(400).json({ error: '"userId" must be a string' })
-  } else if (typeof name !== "string") {
-    res.status(400).json({ error: '"name" must be a string' })
-  }
 
   const params = {
     TableName: USERS_TABLE,
