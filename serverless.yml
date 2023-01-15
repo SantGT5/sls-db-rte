@@ -1,6 +1,9 @@
 service: sls-db-rte
 frameworkVersion: "3"
 
+plugins:
+  - serverless-plugin-typescript
+
 # Throw error when config or deprecation is found
 configValidationMode: error
 deprecationNotificationMode: error

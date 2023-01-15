@@ -1,9 +1,10 @@
-const AWS = require("aws-sdk");
+import { Request, Response } from "express";
+import AWS from "aws-sdk"
 
-const USERS_TABLE = process.env.USERS_TABLE;
+const USERS_TABLE: string | undefined = process.env.USERS_TABLE;
 const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
 
-async function HttpGetUserById(req, res) {
+async function HttpGetUserById(req: Request, res: Response): Promise<void> {
   const params = {
     TableName: USERS_TABLE,
     Key: {
@@ -27,7 +28,7 @@ async function HttpGetUserById(req, res) {
   }
 }
 
-async function HttpEditUser(req, res) {
+async function HttpEditUser(req: Request, res: Response): Promise<void> {
   const { userId, name } = req.body;
   if (typeof userId !== "string") {
     res.status(400).json({ error: '"userId" must be a string' });
@@ -52,7 +53,7 @@ async function HttpEditUser(req, res) {
   }
 }
 
-module.exports = {
+export {
   HttpGetUserById,
   HttpEditUser,
 };
