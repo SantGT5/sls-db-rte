@@ -1,7 +1,9 @@
-import { Request, Response } from "express"
+import type { Request, Response } from "express"
 import AWS from "aws-sdk"
 
-const USERS_TABLE: string | undefined = process.env.USERS_TABLE
+const USERS_TABLE: string = (process.env as NodeJS.ProcessEnv)
+  .USERS_TABLE as string
+
 const dynamoDbClient = new AWS.DynamoDB.DocumentClient()
 
 async function HttpGetUserById(req: Request, res: Response): Promise<void> {
