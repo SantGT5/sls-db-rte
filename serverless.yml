@@ -3,6 +3,7 @@ frameworkVersion: "3"
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-offline
 
 # Throw error when config or deprecation is found
 configValidationMode: error
