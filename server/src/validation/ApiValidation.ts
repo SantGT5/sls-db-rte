@@ -1,11 +1,11 @@
 import type { Response } from "express"
 
-export function ApiValidation(details, res: Response): void {
+export function ApiValidation(errs, res: Response): void {
   const errorMsg: object = { ok: false }
 
-  details.forEach((item) => {
+  errs.forEach((err) => {
     const errorValidation = {
-      [item.path[0]]: item.message,
+      [err.path[0]]: err.message,
     }
 
     Object.assign(errorMsg, errorValidation)

@@ -2,6 +2,7 @@ import type { Request, Response, NextFunction } from "express"
 import { userSchema as schema } from "../models/user.schema"
 
 import { ApiValidation } from "./ApiValidation"
+import { z } from "zod"
 
 export async function userValidator(
   req: Request,
@@ -9,12 +10,12 @@ export async function userValidator(
   next: NextFunction
 ): Promise<void> {
   try {
-    await schema.validateAsync(req.body, { abortEarly: false })
+    await schema.parseAsync(req.body)
 
     next()
   } catch (err) {
-    if (err.isJoi) {
-      ApiValidation(err.details, res)
+    if (err instanceof z.ZodError) {
+      ApiValidation(err.issues, res)
       return
     }
 
